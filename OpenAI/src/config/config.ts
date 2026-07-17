@@ -16,7 +16,12 @@ export const config = {
         maxOutputTokens: 2048,
     },
 
+    chat: {
+        stream: true,
+        maxHistory: 20,
+    },
+
     app: {
         debug: true,
-    }
+    },
 } as const;
