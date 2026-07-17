@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import dotenv from "dotenv";
+import { config } from "./config.js";
 
 dotenv.config({
     path: ".env.local",
@@ -12,5 +13,5 @@ if (!apiKey) {
 }
 
 export const client = new OpenAI({
-    apiKey,
+    apiKey: config.openai.apiKey,
 });

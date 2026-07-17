@@ -1,8 +1,10 @@
 import { client } from "../openai.js";
+import { config } from "../config.js";
 
 export async function sendMessage(message: string): Promise<string> {
+
     const response = await client.responses.create({
-        model: "gpt-5-nano",
+        model: config.openai.model,
         input: message,
     });
 
