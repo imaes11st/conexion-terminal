@@ -1,11 +1,11 @@
-import { ChatService } from "./services/chat.service.js";
+import { Terminal } from "./cli/terminal.js";
 
 async function main() {
-    const chat = new ChatService();
 
-    const response = await chat.send("Hola");
+    const terminal = new Terminal();
 
-    console.log(response);
+    await terminal.start();
+
 }
 
 main().catch(console.error);

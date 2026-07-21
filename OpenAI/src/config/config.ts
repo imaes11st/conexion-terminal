@@ -22,6 +22,8 @@ export const config = {
     },
 
     app: {
-        debug: true,
+        name: "OpenAI CLI",
+        version: "1.0.0",
+        mode: "mock", // "mock" | "openai"
     },
 } as const;
