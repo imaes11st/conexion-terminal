@@ -8,3 +8,8 @@ node_modules/
 # Archivos compilados
 dist/
 build/
+.next/
+*.tsbuildinfo
+
+# Datos locales
+.data/
