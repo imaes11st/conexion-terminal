@@ -1,4 +1,4 @@
-import { config } from "../config/config.js";
+import { config } from "../infrastructure/config/config.js";
 
 export function showBanner(): void {
     console.clear();
