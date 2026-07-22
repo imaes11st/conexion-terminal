@@ -57,3 +57,62 @@ export async function POST(request: NextRequest) {
         );
     }
 }
+
+export async function GET(request: NextRequest) {
+    try {
+        const { searchParams } = new URL(request.url);
+        const conversationId = searchParams.get("conversationId");
+
+        const repository = new JsonFileConversationRepository();
+        const provider = new MockProvider();
+        const chatService = new ChatService(provider, repository);
+
+        if (conversationId) {
+            const history = await chatService.getHistory(conversationId);
+            return new Response(JSON.stringify({ history }), {
+                headers: { "Content-Type": "application/json" }
+            });
+        } else {
+            const list = await chatService.listConversations();
+            return new Response(JSON.stringify({ conversations: list }), {
+                headers: { "Content-Type": "application/json" }
+            });
+        }
+    } catch (error: any) {
+        console.error("[Route GET Error]:", error);
+        return new Response(
+            JSON.stringify({ error: error.message || "Error interno al obtener conversaciones." }),
+            { status: 500, headers: { "Content-Type": "application/json" } }
+        );
+    }
+}
+
+export async function DELETE(request: NextRequest) {
+    try {
+        const { searchParams } = new URL(request.url);
+        const conversationId = searchParams.get("conversationId");
+
+        if (!conversationId) {
+            return new Response(
+                JSON.stringify({ error: "conversationId es requerido para eliminar." }),
+                { status: 400, headers: { "Content-Type": "application/json" } }
+            );
+        }
+
+        const repository = new JsonFileConversationRepository();
+        const provider = new MockProvider();
+        const chatService = new ChatService(provider, repository);
+        
+        await chatService.delete(conversationId);
+
+        return new Response(JSON.stringify({ success: true }), {
+            headers: { "Content-Type": "application/json" }
+        });
+    } catch (error: any) {
+        console.error("[Route DELETE Error]:", error);
+        return new Response(
+            JSON.stringify({ error: error.message || "Error interno al eliminar conversación." }),
+            { status: 500, headers: { "Content-Type": "application/json" } }
+        );
+    }
+}

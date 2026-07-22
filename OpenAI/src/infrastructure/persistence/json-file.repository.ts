@@ -117,4 +117,17 @@ export class JsonFileConversationRepository implements ConversationRepository {
             await this.queueWrite(store);
         }
     }
+
+    public async delete(id: string): Promise<void> {
+        const store = await this.readAll();
+        if (store[id]) {
+            delete store[id];
+            await this.queueWrite(store);
+        }
+    }
+
+    public async listIds(): Promise<string[]> {
+        const store = await this.readAll();
+        return Object.keys(store);
+    }
 }

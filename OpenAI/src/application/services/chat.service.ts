@@ -78,4 +78,12 @@ export class ChatService {
         const conversation = await this.repository.getById(conversationId);
         return conversation ? conversation.getMessages() : [];
     }
+
+    public async delete(conversationId: string): Promise<void> {
+        await this.repository.delete(conversationId);
+    }
+
+    public async listConversations(): Promise<string[]> {
+        return await this.repository.listIds();
+    }
 }

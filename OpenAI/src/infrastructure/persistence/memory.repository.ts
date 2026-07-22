@@ -18,4 +18,12 @@ export class MemoryConversationRepository implements ConversationRepository {
             conversation.clear();
         }
     }
+
+    public async delete(id: string): Promise<void> {
+        this.store.delete(id);
+    }
+
+    public async listIds(): Promise<string[]> {
+        return Array.from(this.store.keys());
+    }
 }

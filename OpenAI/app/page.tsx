@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -16,12 +17,12 @@ export default function HomePage() {
           El entorno web para interactuar de forma premium con tus modelos de lenguaje de inteligencia artificial está listo.
         </p>
 
-        <a href="#" className="btn-primary">
+        <Link href="/chat" className="btn-primary">
           <span>Iniciar Nueva Conversación</span>
           <svg style={{ width: "18px", height: "18px", fill: "currentColor" }} viewBox="0 0 24 24">
             <path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/>
           </svg>
-        </a>
+        </Link>
       </main>
     </div>
   );
